@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Ignore build output
+build/
+
+# Ignore specific file
+config.ini
