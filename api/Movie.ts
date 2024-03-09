@@ -21,14 +21,16 @@ router.get("/",(req,res)=>{
 
 router.get("/:moviename",(req,res)=>{
     const name = req.params.moviename;
-    con.query('select * from AMovies where Title = ?',[name],(err,result,fields)=>{
+    const query = `SELECT * FROM AMovies WHERE Title LIKE ?`;
+
+    con.query(query, [`%${name}%`], (err,result,fields)=>{
         if(result && result.length > 0){
             res.json(result);
         }
         else{
             res.json({
                 success : false,
-                Error : "Incorrect Select Movie."
+                Error : "No movies found matching the search criteria."
             });
         }
     });
